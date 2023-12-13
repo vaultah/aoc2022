@@ -95,25 +95,25 @@ node_t* parse(const char list[]) {
     return node;
 }
 
-void print_list(const node_t* start) {
-    if (start == NULL) {
+void print_list(const node_t *node) {
+    if (node == NULL) {
         printf("nil\n");
         return;
     }
-    if (is_list_start(start))
+    if (is_list_start(node))
         printf("[");
-    else if (is_list_end(start))
+    else if (is_list_end(node))
         printf("]");
     else
-        printf("%d", start->value);
+        printf("%d", node->value);
 
-    printf(" (%lu)", start->depth);
+    printf(" (%lu)", node->depth);
 
-    if (start->next == NULL) {
+    if (node->next == NULL) {
         printf("\n");
     } else {
         printf(" -> ");
-        print_list(start->next);
+        print_list(node->next);
     }
 
 }
@@ -200,7 +200,7 @@ int compare(const node_t *left, const node_t *right) {
 }
 
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     char line[MAX_LINE_LENGTH];
     size_t ordered_pair_idx_sum = 0, packet_count = 0, divider_idx_product = 1;
     node_t **packets = NULL, *first_divider = parse("[[2]]"), *second_divider = parse("[[6]]");
